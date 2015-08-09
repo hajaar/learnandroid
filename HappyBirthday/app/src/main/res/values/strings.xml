@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Happy Birthday</string>
+
+    <string name="happy_birthday">Happy Birthday, Grumpy!</string>
+    <string name="signature">From Hajaar</string>
+    <string name="action_settings">Settings</string>
+</resources>
