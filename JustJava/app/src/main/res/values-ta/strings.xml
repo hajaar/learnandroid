@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">வெறும் காபி</string>
+
+    <string name="quantity_label">அளவு</string>
+    <string name="price_label">விலை</string>
+    <string name="toppings_label">மேல்புறத்தில்</string>
+    <string name="order_button">கொள்முதல்</string>
+    <string name="email_button">மின்னஞ்சல்</string>
+    <string name="increment_button">+</string>
+    <string name="decrement_button">-</string>
+    <string name="action_settings">அமைப்புகளை</string>
+
+</resources>
