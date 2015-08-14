@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,6 +57,14 @@ public class ForecastFragment extends Fragment {
 
         if (item.getItemId() == R.id.action_refresh) {
             updateWeather();
+        }
+        if (item.getItemId() == R.id.show_location) {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=" + mLocation));
+            if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                startActivity(intent);
+            } else {
+                Toast.makeText(getActivity(), "Could not find a map app", Toast.LENGTH_SHORT);
+            }
         }
 
         return super.onOptionsItemSelected(item);
