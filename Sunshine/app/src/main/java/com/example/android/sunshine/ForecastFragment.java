@@ -104,7 +104,12 @@ public class ForecastFragment extends Fragment {
         return shortenedDateFormat.format(time);
     }
 
-    private String formatHighLows(double high, double low) {
+    private String formatHighLows(double high, double low, String scale) {
+
+        if (scale.equals(getString(R.string.temperature_imperial))) {
+            high = high * 1.8 + 32;
+            low = low * 1.8 + 32;
+        }
         // For presentation, assume the user doesn't care about tenths of a degree.
         long roundedHigh = Math.round(high);
         long roundedLow = Math.round(low);
@@ -145,6 +150,8 @@ public class ForecastFragment extends Fragment {
         dayTime = new Time();
 
         String[] resultStrs = new String[numDays];
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String scale = preferences.getString(getString(R.string.pref_temperature_key), getString(R.string.pref_temperature_default));
         for (int i = 0; i < weatherArray.length(); i++) {
             // For now, using the format "Day, description, hi/low"
             String day;
@@ -172,16 +179,16 @@ public class ForecastFragment extends Fragment {
             double high = temperatureObject.getDouble(OWM_MAX);
             double low = temperatureObject.getDouble(OWM_MIN);
 
-            highAndLow = formatHighLows(high, low);
+
+            highAndLow = formatHighLows(high, low, scale);
             resultStrs[i] = day + " - " + description + " - " + highAndLow;
         }
 
-        for (String s : resultStrs) {
-            Log.v("weather parser", "Forecast entry: " + s);
-        }
+
         return resultStrs;
 
     }
+
 
     private void updateWeather() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -249,7 +256,6 @@ public class ForecastFragment extends Fragment {
                     return null;
                 }
                 forecastJsonStr = buffer.toString();
-                Log.v("response", forecastJsonStr);
             } catch (IOException e) {
                 Log.e("PlaceholderFragment", "Error ", e);
                 // If the code didn't successfully get the weather data, there's no point in attemping
