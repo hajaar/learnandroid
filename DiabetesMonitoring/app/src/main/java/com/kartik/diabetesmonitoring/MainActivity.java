@@ -1,8 +1,8 @@
 package com.kartik.diabetesmonitoring;
 
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,16 +12,15 @@ import android.widget.Toast;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
-import com.jjoe64.graphview.series.PointsGraphSeries;
 
 import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private int x = 0;
     GraphView graph;
     LineGraphSeries<DataPoint> series_insulin_reading, series_sugar_reading;
+    private int x = 0;
     private InsulinReadingDataSource insulinReadingDataSource;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         insulinReadingDataSource = new InsulinReadingDataSource(this);
         insulinReadingDataSource.open();
-        GraphView graph = (GraphView) findViewById(R.id.graph);
-        series_insulin_reading = new LineGraphSeries<>();
-        series_insulin_reading.setColor(Color.BLUE);
-        graph.addSeries(series_insulin_reading);
+        drawGraphOnStart();
 
     }
 
@@ -66,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         insulinReadingDataSource.addInsulinReading(insulinReading);
         Toast.makeText(getApplicationContext(),"Count = " + insulinReadingDataSource.getInsulinReadingsCount(),Toast.LENGTH_LONG).show();
 
-        series_insulin_reading.appendData(new DataPoint(x, y_insulin_reading), true, 20);
+
     }
 
     @Override
@@ -81,4 +77,16 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
     }
 
+    private void drawGraphOnStart() {
+        GraphView graph = (GraphView) findViewById(R.id.graph);
+        series_insulin_reading = new LineGraphSeries<>();
+        series_insulin_reading.setColor(Color.BLUE);
+        graph.addSeries(series_insulin_reading);
+        List<InsulinReading> insulinReadings = insulinReadingDataSource.getAllInsulingReadings();
+        int i = 0;
+        for (InsulinReading insulinReading : insulinReadings) {
+            series_insulin_reading.appendData(new DataPoint(i, insulinReading.getQuantity()), true, 20);
+            i++;
+        }
+    }
 }
