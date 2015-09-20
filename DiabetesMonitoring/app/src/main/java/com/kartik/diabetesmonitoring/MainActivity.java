@@ -1,5 +1,6 @@
 package com.kartik.diabetesmonitoring;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -50,7 +51,10 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
+        if (id == R.id.action_insulin_readings_details) {
+            Intent intent = new Intent(this, InsulinReadingsDetail.class);
+            this.startActivity(intent);
+        }
         return super.onOptionsItemSelected(item);
     }
 
