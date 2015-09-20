@@ -69,13 +69,13 @@ public class InsulinReadingDataSource {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             InsulinReading insulinReading = new InsulinReading();
-            insulinReading.setID(Integer.parseInt(cursor.getString(0)));
+            insulinReading.setID(Long.parseLong(cursor.getString(0)));
             insulinReading.setName(cursor.getString(1));
             insulinReading.setType(cursor.getString(2));
             insulinReading.setTimeOfDay(cursor.getString(3));
             insulinReading.setQuantity(Integer.parseInt(cursor.getString(4)));
-            insulinReading.setInjecteDateTime(Integer.parseInt(cursor.getString(5)));
-            insulinReading.setCreatedDateTime(Integer.parseInt(cursor.getString(6)));
+            insulinReading.setInjecteDateTime(Long.parseLong(cursor.getString(5)));
+            insulinReading.setCreatedDateTime(Long.parseLong(cursor.getString(6)));
             insulinReadings.add(insulinReading);
             cursor.moveToNext();
         }
