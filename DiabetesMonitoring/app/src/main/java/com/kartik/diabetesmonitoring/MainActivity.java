@@ -1,16 +1,39 @@
 package com.kartik.diabetesmonitoring;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
+import com.jjoe64.graphview.series.PointsGraphSeries;
+
+import java.util.Calendar;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private int x = 0;
+    GraphView graph;
+    LineGraphSeries<DataPoint> series_insulin_reading, series_sugar_reading;
+    private InsulinReadingDataSource insulinReadingDataSource;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        insulinReadingDataSource = new InsulinReadingDataSource(this);
+        insulinReadingDataSource.open();
+        GraphView graph = (GraphView) findViewById(R.id.graph);
+        series_insulin_reading = new LineGraphSeries<>();
+        series_insulin_reading.setColor(Color.BLUE);
+        graph.addSeries(series_insulin_reading);
+
     }
 
     @Override
@@ -34,4 +57,28 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void addReading(View view) {
+        x++;
+        Calendar cal = Calendar.getInstance();
+        int y_insulin_reading = Integer.valueOf(((TextView)findViewById(R.id.insuling_reading)).getText().toString());
+        InsulinReading insulinReading = new InsulinReading("Lantus","Long","Morning",y_insulin_reading,cal.getTimeInMillis(),cal.getTimeInMillis());
+        insulinReadingDataSource.addInsulinReading(insulinReading);
+        Toast.makeText(getApplicationContext(),"Count = " + insulinReadingDataSource.getInsulinReadingsCount(),Toast.LENGTH_LONG).show();
+
+        series_insulin_reading.appendData(new DataPoint(x, y_insulin_reading), true, 20);
+    }
+
+    @Override
+    protected void onResume() {
+        insulinReadingDataSource.open();
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        insulinReadingDataSource.close();
+        super.onPause();
+    }
+
 }
