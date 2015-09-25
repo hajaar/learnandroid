@@ -2,13 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity"
-    android:orientation="vertical">
+    tools:context=".MainActivity">
 
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
@@ -29,20 +28,20 @@
 
 
             <EditText
-                android:id="@+id/insuling_reading"
+                android:id="@+id/insulin_reading"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="insulin"
-                android:inputType="number"/>
+                android:layout_weight="1"
+                android:inputType="number"
+                android:text="insulin" />
 
             <EditText
                 android:id="@+id/sugar_reading"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="blood sugar"
-                android:inputType="number"/>
+                android:layout_weight="1"
+                android:inputType="number"
+                android:text="blood sugar" />
 
         </LinearLayout>
 
@@ -50,13 +49,13 @@
             android:id="@+id/add_reading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add"
             android:layout_gravity="center"
-            android:onClick="addReading"/>
+            android:onClick="addReading"
+            android:text="Add" />
         </LinearLayout>
     </android.support.v7.widget.CardView>
     <com.jjoe64.graphview.GraphView
+        android:id="@+id/graph"
         android:layout_width="match_parent"
-        android:layout_height="200dip"
-        android:id="@+id/graph" />
+        android:layout_height="200dip" />
 </LinearLayout>

@@ -3,6 +3,7 @@
     <string name="action_insulin_readings_details">Insulin Readings Detail</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_insulin_readings_detail">InsulinReadingsDetail</string>
-
+    <string name="add_insulin">Add Insulin Reading</string>
+    <string name="add_blood_sugar">Add Blood Sugar</string>
     <string name="hello_world">Hello world!</string>
 </resources>
