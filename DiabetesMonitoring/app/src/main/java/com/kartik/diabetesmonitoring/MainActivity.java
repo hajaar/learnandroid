@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     public void addReading(View view) {
         x++;
         Calendar cal = Calendar.getInstance();
-        int y_insulin_reading = Integer.valueOf(((TextView)findViewById(R.id.insuling_reading)).getText().toString());
+        int y_insulin_reading = Integer.valueOf(((TextView) findViewById(R.id.insulin_reading)).getText().toString());
         InsulinReading insulinReading = new InsulinReading("Lantus","Long","Morning",y_insulin_reading,cal.getTimeInMillis(),cal.getTimeInMillis());
         insulinReadingDataSource.addInsulinReading(insulinReading);
         Toast.makeText(getApplicationContext(),"Count = " + insulinReadingDataSource.getInsulinReadingsCount(),Toast.LENGTH_LONG).show();
