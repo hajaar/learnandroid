@@ -49,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent intent = new Intent(this, SettingsDashboardActivity.class);
+            this.startActivity(intent);
         }
         if (id == R.id.action_insulin_readings_details) {
             Intent intent = new Intent(this, InsulinReadingsDetail.class);
@@ -65,8 +66,6 @@ public class MainActivity extends AppCompatActivity {
         InsulinReading insulinReading = new InsulinReading("Lantus","Long","Morning",y_insulin_reading,cal.getTimeInMillis(),cal.getTimeInMillis());
         insulinReadingDataSource.addInsulinReading(insulinReading);
         Toast.makeText(getApplicationContext(),"Count = " + insulinReadingDataSource.getInsulinReadingsCount(),Toast.LENGTH_LONG).show();
-
-
     }
 
     @Override

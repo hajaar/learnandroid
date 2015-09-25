@@ -6,4 +6,5 @@
     <string name="add_insulin">Add Insulin Reading</string>
     <string name="add_blood_sugar">Add Blood Sugar</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_settings_dashboard">SettingsDashboardActivity</string>
 </resources>
