@@ -1,15 +1,18 @@
 package com.kartik.diabetesmonitoring;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import java.util.List;
 
-public class InsulinReadingsDetail extends AppCompatActivity {
+public class InsulinReadingsDetail extends AppCompatActivity implements InsulinReadingsDetailsAdapter.ClickListener {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -34,7 +37,7 @@ public class InsulinReadingsDetail extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // specify an adapter (see also next example)
-        mAdapter = new InsulinReadingsDetailsAdapter(insulinReadings);
+        mAdapter = new InsulinReadingsDetailsAdapter(insulinReadings, this);
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -58,5 +61,11 @@ public class InsulinReadingsDetail extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void itemClicked(View view, int position) {
+        Toast.makeText(getApplicationContext(), "id " + position, Toast.LENGTH_LONG).show();
+        startActivity(new Intent(getApplicationContext(), SettingsDashboardActivity.class));
     }
 }

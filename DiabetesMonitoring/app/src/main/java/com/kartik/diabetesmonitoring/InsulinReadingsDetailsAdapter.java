@@ -5,6 +5,7 @@ package com.kartik.diabetesmonitoring;
  */
 
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,16 +18,23 @@ import java.util.List;
 import java.util.Locale;
 
 public class InsulinReadingsDetailsAdapter extends RecyclerView.Adapter<InsulinReadingsDetailsAdapter.ViewHolder> {
+    Context context;
     private List<InsulinReading> mDataset;
+    private ClickListener clickListener;
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public InsulinReadingsDetailsAdapter(List<InsulinReading> myDataset) {
+    public InsulinReadingsDetailsAdapter(List<InsulinReading> myDataset, ClickListener clickListener) {
         mDataset = myDataset;
+        this.clickListener = clickListener;
     }
 
     public void add(int position, InsulinReading item) {
         mDataset.add(position, item);
         notifyItemInserted(position);
+    }
+
+    public void setClickListener(ClickListener clickListener) {
+        this.clickListener = clickListener;
     }
 
     public void remove(InsulinReading item) {
@@ -42,6 +50,7 @@ public class InsulinReadingsDetailsAdapter extends RecyclerView.Adapter<InsulinR
         // create a new view
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_insulin_readings_details, parent, false);
         // set the view's size, margins, paddings and layout parameters
+        context = v.getContext();
         ViewHolder vh = new ViewHolder(v);
         return vh;
     }
@@ -70,10 +79,14 @@ public class InsulinReadingsDetailsAdapter extends RecyclerView.Adapter<InsulinR
         return mDataset.size();
     }
 
+    public interface ClickListener {
+        void itemClicked(View view, int position);
+    }
+
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         // each data item is just a string in this case
         public TextView txtID;
         public TextView txtDay;
@@ -84,6 +97,7 @@ public class InsulinReadingsDetailsAdapter extends RecyclerView.Adapter<InsulinR
 
         public ViewHolder(View v) {
             super(v);
+            v.setOnClickListener(this);
             txtID = (TextView) v.findViewById(R.id.insulin_reading_id);
             txtDay = (TextView) v.findViewById(R.id.insulin_reading_day);
             txtTimeOfDay = (TextView) v.findViewById(R.id.insulin_reading_time_of_day);
@@ -91,7 +105,13 @@ public class InsulinReadingsDetailsAdapter extends RecyclerView.Adapter<InsulinR
             txtType = (TextView) v.findViewById(R.id.insulin_reading_type);
             txtQuantity = (TextView) v.findViewById(R.id.insulin_reading_quantity);
         }
-    }
 
+        @Override
+        public void onClick(View v) {
+            if (clickListener != null) {
+                clickListener.itemClicked(v, getAdapterPosition());
+            }
+        }
+    }
 
 }
