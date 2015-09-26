@@ -19,6 +19,10 @@ public class Medicine {
         return ID;
     }
 
+    public void setID(long ID) {
+        this.ID = ID;
+    }
+
     public boolean getIsInsulin() {
         return isInsulin;
     }
