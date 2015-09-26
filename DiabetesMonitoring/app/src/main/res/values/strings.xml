@@ -7,5 +7,6 @@
     <string name="add_blood_sugar">Add Blood Sugar</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_settings_dashboard">Settings Dashboard Activity</string>
-    <string name="start_insuling_setup">Set-up Insulin</string>
+    <string name="start_medicine_setup">Set-up Medicines</string>
+    <string name="title_activity_setup_medicines">setup_medicines</string>
 </resources>

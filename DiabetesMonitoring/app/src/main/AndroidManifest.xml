@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kartik.diabetesmonitoring" >
 
+    <uses-sdk>
+        android:minSdkVersion="19"
+        android:targetSdkVersion="22"
+    </uses-sdk>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,6 +20,25 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".InsulinReadingsDetail"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".SettingsDashboardActivity"
+            android:label="@string/title_activity_settings_dashboard"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.kartik.diabetesmonitoring.MainActivity" />
+        </activity>
+        <activity
+            android:name=".SetupMedicines"
+            android:label="@string/title_activity_setup_medicines"
+            android:parentActivityName=".SettingsDashboardActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.kartik.diabetesmonitoring.SettingsDashboardActivity" />
         </activity>
     </application>
 
