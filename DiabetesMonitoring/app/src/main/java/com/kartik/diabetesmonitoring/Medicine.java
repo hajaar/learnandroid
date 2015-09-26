@@ -12,7 +12,7 @@ public class Medicine {
     private boolean isNoon;
     private boolean isEvening;
     private boolean isBeforeFood;
-    private String quantityType;
+    private boolean quantityType;
     private double quantity;
 
     public long getID() {
@@ -79,11 +79,11 @@ public class Medicine {
         this.isBeforeFood = isBeforeFood;
     }
 
-    public String getQuantityType() {
+    public boolean getQuantityType() {
         return quantityType;
     }
 
-    public void setQuantityType(String quantityType) {
+    public void setQuantityType(boolean quantityType) {
         this.quantityType = quantityType;
     }
 
@@ -93,5 +93,34 @@ public class Medicine {
 
     public void setQuantity(double quantity) {
         this.quantity = quantity;
+    }
+
+    public String getDosage() {
+        String tmp_dosage = "";
+        if (isMorning == true) tmp_dosage += " Morning ";
+        if (isNoon == true) tmp_dosage += " Noon ";
+        if (isEvening == true) tmp_dosage += " Evening ";
+        if (isBeforeFood == true) {
+            tmp_dosage += " Before Food ";
+        } else {
+            tmp_dosage += " After Food ";
+        }
+        return tmp_dosage;
+    }
+
+    public String getTypeOfMedicine() {
+        if (isInsulin == true) {
+            return " Insulin ";
+        } else {
+            return " Tablet ";
+        }
+    }
+
+    public String getActualQuantity() {
+        if (quantityType == true) {
+            return "Fixed " + quantity;
+        } else {
+            return "Variable ";
+        }
     }
 }

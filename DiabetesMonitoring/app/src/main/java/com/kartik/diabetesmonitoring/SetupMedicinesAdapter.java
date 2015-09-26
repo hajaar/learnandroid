@@ -58,10 +58,10 @@ public class SetupMedicinesAdapter extends RecyclerView.Adapter<SetupMedicinesAd
         // - replace the contents of the view with that element
         final Medicine medicine = mDataset.get(position);
         holder.txtID.setText(medicine.getID() + "");
-        holder.txtName.setText(medicine.getIsInsulin() + " " + medicine.getName());
+        holder.txtName.setText(medicine.getTypeOfMedicine() + " " + medicine.getName());
         holder.txtPurpose.setText(medicine.getPurpose() + "");
-        holder.txtPurpose.setText(medicine.isMorning() + " " + medicine.isNoon() + " " + medicine.isEvening() + " " + medicine.isBeforeFood());
-        holder.txtQuantity.setText(medicine.getQuantityType() + "" + medicine.getQuantity());
+        holder.txtDosage.setText(medicine.getDosage());
+        holder.txtQuantity.setText(medicine.getActualQuantity());
     }
 
     // Return the size of your dataset (invoked by the layout manager)

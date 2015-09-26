@@ -10,14 +10,108 @@
     tools:context="com.kartik.diabetesmonitoring.setup_medicines">
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name" />
+
+        <EditText
+            android:id="@+id/add_medicine_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Purpose" />
+
+        <EditText
+            android:id="@+id/add_medicine_purpose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/add_medicine_is_morning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Morning" />
+
+        <CheckBox
+            android:id="@+id/add_medicine_is_noon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Noon" />
+
+        <CheckBox
+            android:id="@+id/add_medicine_is_evening"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Evening" />
+
+        <CheckBox
+            android:id="@+id/add_medicine_is_before_food"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Before Food" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ToggleButton
+            android:id="@+id/add_medicine_is_insulin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:textOff="Tablets"
+            android:textOn="Insulin" />
+
+        <ToggleButton
+            android:id="@+id/add_medicine_quantity_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:textOff="Variable"
+            android:textOn="Fixed" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="quantity" />
+
+        <EditText
+            android:id="@+id/add_medicine_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numeric="decimal" />
+    </LinearLayout>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="addMedicine" />
+        android:onClick="addMedicine"
+        android:text="Add" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/medicine_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:scrollbars="vertical" />
 </LinearLayout>

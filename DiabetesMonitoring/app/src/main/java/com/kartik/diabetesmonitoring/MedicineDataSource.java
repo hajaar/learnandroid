@@ -50,7 +50,7 @@ public class MedicineDataSource {
         values.put(MySQLiteHelper.COLUMN_MEDICINE_MASTER_NOON, boolToInt(medicine.isNoon()));
         values.put(MySQLiteHelper.COLUMN_MEDICINE_MASTER_EVENING, boolToInt(medicine.isEvening()));
         values.put(MySQLiteHelper.COLUMN_MEDICINE_MASTER_BEFORE_FOOD, boolToInt(medicine.isBeforeFood()));
-        values.put(MySQLiteHelper.COLUMN_MEDICINE_MASTER_QUANTITY_TYPE, medicine.getQuantityType());
+        values.put(MySQLiteHelper.COLUMN_MEDICINE_MASTER_QUANTITY_TYPE, boolToInt(medicine.getQuantityType()));
         values.put(MySQLiteHelper.COLUMN_MEDICINE_MASTER_QUANTITY, medicine.getQuantity());
         long insertId = database.insert(MySQLiteHelper.TABLE_MEDICINE_MASTER, null,
                 values);
@@ -58,6 +58,7 @@ public class MedicineDataSource {
                 allColumns, MySQLiteHelper.COLUMN_MEDICINE_MASTER_ID + " = " + insertId, null,
                 null, null, null);
         cursor.close();
+
     }
 
     public void deleteMedicine(Medicine medicine) {
@@ -83,9 +84,9 @@ public class MedicineDataSource {
             medicine.setIsNoon(intToBoolean(cursor.getInt(5)));
             medicine.setIsEvening(intToBoolean(cursor.getInt(6)));
             medicine.setIsBeforeFood(intToBoolean(cursor.getInt(7)));
-            medicine.setQuantityType(cursor.getString(8));
+            medicine.setQuantityType(intToBoolean(cursor.getInt(8)));
             medicine.setQuantity(cursor.getDouble(9));
-
+            medicines.add(medicine);
 
             cursor.moveToNext();
         }

@@ -3,7 +3,6 @@ package com.kartik.diabetesmonitoring;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,15 +15,12 @@ public class SettingsDashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_dashboard);
         Button button = (Button) findViewById(R.id.start_medicine_setup);
-        Log.d("dashboard", "oncreate");
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("dashboard", "before creating intent");
                 Intent intent = new Intent(v.getContext(), SetupMedicines.class);
-                Log.d("dashboard", "after creating intent");
                 startActivity(intent);
-                Log.d("dashboard", "after calling intent");
+
             }
         });
     }
