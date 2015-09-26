@@ -47,10 +47,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             COLUMN_MEDICINE_MASTER_INSULIN + " text not null, " +
             COLUMN_MEDICINE_MASTER_NAME + " text not null, " +
             COLUMN_MEDICINE_MASTER_PURPOSE + " text , " +
-            COLUMN_MEDICINE_MASTER_MORNING + " text not null, " +
-            COLUMN_MEDICINE_MASTER_NOON + " text not null, " +
-            COLUMN_MEDICINE_MASTER_EVENING + " text not null, " +
-            COLUMN_MEDICINE_MASTER_BEFORE_FOOD + " text not null, " +
+            COLUMN_MEDICINE_MASTER_MORNING + " integer not null, " +
+            COLUMN_MEDICINE_MASTER_NOON + " integer not null, " +
+            COLUMN_MEDICINE_MASTER_EVENING + " integer not null, " +
+            COLUMN_MEDICINE_MASTER_BEFORE_FOOD + " integer not null, " +
             COLUMN_MEDICINE_MASTER_QUANTITY_TYPE + " text not null, " +
             COLUMN_MEDICINE_MASTER_QUANTITY + " numeric not null, " +
             ")";
