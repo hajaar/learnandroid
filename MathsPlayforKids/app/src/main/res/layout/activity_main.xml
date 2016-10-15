@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     android:id="@+id/activity_main"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -12,120 +13,197 @@
     tools:context="com.skva.mathsplayforkids.MainActivity">
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+        <TextView
+            android:id="@+id/c1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/c2"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/c3"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/c4"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+    
+    <LinearLayout
         android:id="@+id/panel_score"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:background="@drawable/customborder"
 
-        android:layout_alignParentStart="true"
         >
-        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="0dp"
-                    android:layout_weight="5"
-                    android:layout_height="wrap_content"
-                    android:checkedButton="@+id/radio_gt"
-                    android:orientation="horizontal">
-            <RadioButton android:id="@+id/radio_gt"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:button="@drawable/custom_radio_button"
-                         android:text="@string/greaterthan"
-                         android:onClick="onRadioButtonClicked"/>
-            <RadioButton android:id="@+id/radio_lt"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:button="@drawable/custom_radio_button"
-                         android:text="@string/lessthan"
-                         android:onClick="onRadioButtonClicked"/>
-            <RadioButton android:id="@+id/radio_add"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:button="@drawable/custom_radio_button"
-                         android:text="@string/add"
-                         android:onClick="onRadioButtonClicked"/>
-            <RadioButton android:id="@+id/radio_subtract"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:button="@drawable/custom_radio_button"
-                         android:text="@string/subtract"
-                         android:onClick="onRadioButtonClicked"/>
-            <RadioButton android:id="@+id/radio_between"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:button="@drawable/custom_radio_button"
-                         android:text="@string/between"
-                         android:onClick="onRadioButtonClicked"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/selectgame"/>
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
 
-        </RadioGroup>
+            android:prompt="@string/spinner_prompt" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:gravity="right"
-                android:text="@string/score"/>
+        <Switch
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/musicswitch"
 
-            <TextView
-                android:id="@+id/score"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:gravity="left"/>
+            />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/difficultyswitch"/>
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            />
+        </LinearLayout>
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:background="@drawable/customborder">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="6"
+            android:layout_height="match_parent"
+            android:gravity="center"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/score"/>
+
+        <TextView
+            android:id="@+id/score"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"/>
+    </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/panel_question"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/panel_score">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/customborder">
 
         <TextView
             android:id="@+id/question"
             android:layout_width="0dp"
             android:layout_weight="3"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
             android:text="question"/>
 
         <Button
             android:id="@+id/skip"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
             android:text="skip >>"/>
     </LinearLayout>
     
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"        
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/panel_question">
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:background="@drawable/customborder"
+        android:orientation="horizontal"
+        >
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
 
+            android:orientation="vertical">
         <Button
             android:id="@+id/button1"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_alignParentLeft="true"/>
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/buttonshape"/>
 
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+
+                android:gravity="center"
+                android:background="@drawable/buttonshape"/>
+
+         </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
         <Button
             android:id="@+id/button2"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_toRightOf="@id/button1"/>
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/buttonshape"
+            />
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_below="@id/button1"
-            android:layout_alignParentLeft="true"/>
+
 
         <Button
             android:id="@+id/button4"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_below="@id/button2"
-            android:layout_toRightOf="@id/button3"/>
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/buttonshape"/>
+        </LinearLayout>
+    </LinearLayout>
 
-    </RelativeLayout>
-</RelativeLayout>
+</LinearLayout>

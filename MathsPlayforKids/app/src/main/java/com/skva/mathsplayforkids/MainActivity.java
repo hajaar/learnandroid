@@ -7,14 +7,16 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Random;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements AdapterView.OnItemSelectedListener {
 
     private int score=0, total_attempts =0;
     private String question ="";
@@ -22,6 +24,8 @@ public class MainActivity extends Activity {
     private int difficulty = 0;
     private int a=0;
     private int[] choiceArray = new int[4];
+    private Spinner spinner1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +71,30 @@ public class MainActivity extends Activity {
 
             }
         });
+        spinner1 = (Spinner) findViewById(R.id.spinner1);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.game_list, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner1.setAdapter(adapter);
+
+        spinner1.setOnItemSelectedListener(this);
+
+
         updateScore(0);
         generateQuestion();
+    }
+
+    public void onItemSelected(AdapterView<?> parent, View view,
+                               int pos, long id) {
+        // An item was selected. You can retrieve the selected item using
+        // parent.getItemAtPosition(pos)
+        game_type = parent.getSelectedItemPosition();
+        Log.d("spinner ",""+game_type);
+        generateQuestion();
+    }
+
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Another interface callback
     }
 
     private void updateScore(int tmpScore) {
@@ -79,6 +105,7 @@ public class MainActivity extends Activity {
 
     private void generateQuestion() {
         Random r = new Random();
+        Log.d("generateQuestion",""+game_type);
         if ((game_type == 0) && (difficulty == 0)) {
             int difficulty_max = 50;
             int difficulty_min = 5;
@@ -162,7 +189,6 @@ public class MainActivity extends Activity {
             generateQuestion();
         } else {
             Log.d("validateAnswer","validation failed");
-//            Toast.makeText(getApplicationContext(),"Wrong Answer Dumbass", Toast.LENGTH_SHORT).show();
             LayoutInflater inflater = getLayoutInflater();
             View layout = inflater.inflate(R.layout.custom_toast_success,
                     (ViewGroup) findViewById(R.id.custom_toast_container));
@@ -172,7 +198,7 @@ public class MainActivity extends Activity {
 
             Toast toast = new Toast(getApplicationContext());
             toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-            toast.setDuration(Toast.LENGTH_LONG);
+            toast.setDuration(Toast.LENGTH_SHORT);
             toast.setView(layout);
             toast.show();
         }
@@ -196,7 +222,7 @@ public class MainActivity extends Activity {
         ((Button) findViewById(R.id.button4)).setText(Integer.toString(tempArray[3]));
     }
 
-    public void onRadioButtonClicked(View view) {
+/*    public void onRadioButtonClicked(View view) {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
 
@@ -228,5 +254,5 @@ public class MainActivity extends Activity {
                     generateQuestion();
                 break;
         }
-    }
+    }*/
 }
