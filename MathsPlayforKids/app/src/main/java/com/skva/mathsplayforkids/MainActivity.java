@@ -3,7 +3,10 @@ package com.skva.mathsplayforkids;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -158,7 +161,20 @@ public class MainActivity extends Activity {
             updateScore(1);
             generateQuestion();
         } else {
-            Toast.makeText(getApplicationContext(),"Wrong Answer Dumbass", Toast.LENGTH_LONG);
+            Log.d("validateAnswer","validation failed");
+//            Toast.makeText(getApplicationContext(),"Wrong Answer Dumbass", Toast.LENGTH_SHORT).show();
+            LayoutInflater inflater = getLayoutInflater();
+            View layout = inflater.inflate(R.layout.custom_toast_success,
+                    (ViewGroup) findViewById(R.id.custom_toast_container));
+
+            TextView text = (TextView) layout.findViewById(R.id.text);
+            text.setText("Try Again");
+
+            Toast toast = new Toast(getApplicationContext());
+            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            toast.setDuration(Toast.LENGTH_LONG);
+            toast.setView(layout);
+            toast.show();
         }
     }
 
