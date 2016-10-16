@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Maths Play for Kids</string>
+
+    <string name="help_text">Touch the right button to win!</string>
+    <string name="score">Score</string>
+    <string name="selectgame">Choose Game </string>
+    <string name="spinner_prompt">Choose Your Game</string>
+    <string name="musicswitch">Music</string>
+    <string name="difficultyswitch">Difficulty</string>
+    <string-array
+        name="game_list">
+        <item> &gt; (Greater Than)</item>
+        <item> &lt; (Lesser Than)</item>
+        <item> Between</item>
+        <item> + (Addition)</item>
+        <item> - (Subtraction)</item>
+    </string-array>
+
+</resources>
