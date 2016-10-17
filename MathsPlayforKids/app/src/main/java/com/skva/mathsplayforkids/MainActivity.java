@@ -8,6 +8,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceFragment;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -162,7 +163,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
             }
             tempArray[j] = choiceArray[i];
         }
-        ((TextView) findViewById(R.id.score)).setText(" Score: "+ score + "/" + total_attempts);
+        ((TextView) findViewById(R.id.score)).setText(" Score: " + score);
         ((TextView) findViewById(R.id.question)).setText(question);
         ((Button) findViewById(R.id.button1)).setText(Integer.toString(tempArray[0]));
         ((Button) findViewById(R.id.button2)).setText(Integer.toString(tempArray[1]));
@@ -230,7 +231,9 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         //noinspection SimplifiableIfStatement
         switch(id) {
             case R.id.action_settings:
-                Toast.makeText(this, "Coming soon...", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+
                 break;
             case R.id.action_help:
                 onCoachMark();
@@ -346,6 +349,17 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
                 Log.d("generateQuestion", "a1: " + choiceArray[0] + " a2: " + choiceArray[1] + " a3: " + choiceArray[2] + " a4: " + choiceArray[3]);
                 break;
             }
+        }
+    }
+
+    public static class PrefsFragment extends PreferenceFragment {
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+
+            // Load the preferences from an XML resource
+            addPreferencesFromResource(R.xml.preferences);
         }
     }
 }
