@@ -13,46 +13,56 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.skva.mathsplayforkids.MainActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:id="@+id/child_name"
+            style="@style/ChildName"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            />
 
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            style="@style/LabelText"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/selectgame"/>
+
+        <TextView
+
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:gravity="center"/>
+
+        <Spinner
+            android:id="@+id/spinner1"
+            style="@style/ValueText"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+
+            android:gravity="center"
+
+            android:prompt="@string/spinner_prompt"/>
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            >
-
-            <TextView
-                style="@style/LabelText"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/selectgame"/>
-
-            <TextView
-
-                android:layout_width="20dp"
-                android:layout_height="match_parent"
-                android:gravity="center"/>
-
-            <Spinner
-                android:id="@+id/spinner1"
-                style="@style/ValueText"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-
-                android:gravity="center"
-
-                android:prompt="@string/spinner_prompt"/>
-
-
-        </LinearLayout>
-
-
-
-
+    </LinearLayout>
 
 
     <LinearLayout
@@ -85,8 +95,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
             android:background="@drawable/skipcustomborder"
+            android:gravity="center"
             android:text="skip >>"/>
     </LinearLayout>
 

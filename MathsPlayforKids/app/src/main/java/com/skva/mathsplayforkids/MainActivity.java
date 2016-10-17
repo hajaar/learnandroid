@@ -3,12 +3,13 @@ package com.skva.mathsplayforkids;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -36,12 +37,20 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
     private int a=0;
     private int[] choiceArray = new int[4];
     private Spinner spinner1;
+    private String childname = "";
+    private Boolean soundtoggle = true;
+    private Boolean runonce = false;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+        childname = settings.getString("pref_name", "");
+        soundtoggle = settings.getBoolean("pref_sound", true);
+        ((TextView) findViewById(R.id.child_name)).setText("Hi " + childname);
         final Button button1 = (Button) findViewById(R.id.button1);
         button1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -92,7 +101,14 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         spinner1.setAdapter(adapter);
 
         spinner1.setOnItemSelectedListener(this);
-        onCoachMark();
+        runonce = settings.getBoolean("RUN_ONCE", true);
+        if (runonce) {
+            onCoachMark();
+            SharedPreferences.Editor editor;
+            editor = settings.edit();
+            editor.putBoolean("RUN_ONCE", false);
+            editor.commit();
+        }
 
         updateScore(0);
         generateQuestion();
@@ -186,7 +202,10 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
             text = "Try Again";
             time = 500;
         }
-        final MediaPlayer mp = MediaPlayer.create(getApplicationContext(), sound);
+        if (soundtoggle) {
+            final MediaPlayer mp = MediaPlayer.create(getApplicationContext(), sound);
+            mp.start();
+        }
 
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.custom_toast,
@@ -202,14 +221,13 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.setView(layout);
-        mp.start();
+
         toast.show();
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 toast.cancel();
-                mp.stop();
             }
         }, time);
     }
@@ -352,14 +370,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         }
     }
 
-    public static class PrefsFragment extends PreferenceFragment {
 
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
 
-            // Load the preferences from an XML resource
-            addPreferencesFromResource(R.xml.preferences);
-        }
-    }
 }
