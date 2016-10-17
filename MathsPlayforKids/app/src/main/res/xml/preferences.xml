@@ -13,10 +13,7 @@
             android:title="@string/pref_sound"/>
     </PreferenceCategory>
     <PreferenceCategory android:title="Game Preferences">
-        <EditTextPreference
-            android:key="pref_gt_min"
-            android:summary="Greater than minimum value to be input here"
-            android:title="Greater Than Min"/>
+
     </PreferenceCategory>
 
 </PreferenceScreen>

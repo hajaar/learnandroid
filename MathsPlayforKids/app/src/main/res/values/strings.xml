@@ -24,7 +24,7 @@
     <string name="pref_name">Name</string>
     <string name="pref_name_summ">This is the name of your child which will displayed in the application</string>
     <string name="pref_sound">Sound</string>
-    <string name="pref_sound_summ">Turns off or Sound</string>
+    <string name="pref_sound_summ">Switch Sound On or Off </string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

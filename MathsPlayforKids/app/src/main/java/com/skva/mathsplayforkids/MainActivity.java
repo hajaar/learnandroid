@@ -51,6 +51,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         childname = settings.getString("pref_name", "");
         soundtoggle = settings.getBoolean("pref_sound", true);
         ((TextView) findViewById(R.id.child_name)).setText("Hi " + childname);
+
         final Button button1 = (Button) findViewById(R.id.button1);
         button1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
