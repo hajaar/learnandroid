@@ -14,6 +14,7 @@
         <item> Between</item>
         <item> + (Addition)</item>
         <item> - (Subtraction)</item>
+        <item> Random </item>
     </string-array>
     <string name="feedback">Feed back</string>
     <string name="action_settings">Settings</string>

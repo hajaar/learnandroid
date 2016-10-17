@@ -102,6 +102,9 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         // An item was selected. You can retrieve the selected item using
         // parent.getItemAtPosition(pos)
         game_type = parent.getSelectedItemPosition();
+        if (game_type == 5) {
+            game_type = 100;
+        }
         Log.d("spinner ",""+game_type);
         generateQuestion();
     }
@@ -118,85 +121,20 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
 
     private void generateQuestion() {
         Random r = new Random();
-        Log.d("generateQuestion",""+game_type);
-        if ((game_type == 0) && (difficulty == 0)) {
-            int difficulty_max = 50;
-            int difficulty_min = 5;
-            int q = r.nextInt(difficulty_max-difficulty_min)+difficulty_min+1;
-            if (q==difficulty_max) {
-                q=q-2;
-            }
-            Log.d("generateQuestion", "q : " +q);
-            question = " >  " + q + " ? ";
-            choiceArray[0] = r.nextInt(q-difficulty_min)+difficulty_min;
-            choiceArray[1] = r.nextInt(q-difficulty_min)+difficulty_min;
-            choiceArray[2] = r.nextInt(q-difficulty_min)+difficulty_min;
-            choiceArray[3] = r.nextInt(difficulty_max-q)+q+1;
-            Log.d("generateQuestion", "a1: " +choiceArray[0]+" a2: " +choiceArray[1] + " a3: " +choiceArray[2] + " a4: " +choiceArray[3]);
+        Log.d("generateQuestion", "" + game_type);
+        if (game_type != 100) {
+            generateQuestionBasedOnGameType(game_type);
+        } else
+
+        {
+            generateQuestionBasedOnGameType(r.nextInt(5));
         }
-        if ((game_type == 1) && (difficulty == 0)) {
-            int difficulty_max = 50;
-            int difficult_min = 5;
-            int q = r.nextInt(difficulty_max-difficult_min)+difficult_min+1;
-            if (q==difficulty_max) {
-                q=q-2;
-            }
-            Log.d("generateQuestion", "q : " +q);
-            question = " < " + q + " ? ";
-            choiceArray[0] = r.nextInt(difficulty_max-q)+q+1;
-            choiceArray[1] = r.nextInt(difficulty_max-q)+q+1;
-            choiceArray[2] = r.nextInt(difficulty_max-q)+q+1;
-            choiceArray[3] = r.nextInt(q-difficult_min)+difficult_min;
-            Log.d("generateQuestion", "a1: " +choiceArray[0]+" a2: " +choiceArray[1] + " a3: " +choiceArray[2] + " a4: " +choiceArray[3]);
-        }
-        if ((game_type == 2) && (difficulty == 0)) {
-            int difficulty_max = 50;
-            int difficulty_min = 5;
-            int q = r.nextInt(difficulty_max-difficulty_min)+difficulty_min+1;
-            if (q==difficulty_max) {
-                q=q-2;
-            }
-            int p = q+2;
-            Log.d("generateQuestion", "p: "+p+" q : " +q);
-            question = " " +q + " ___ " + p + " ?";
-            choiceArray[0] = r.nextInt(p)+difficulty_min;
-            choiceArray[1] = r.nextInt(q)+difficulty_min;
-            choiceArray[2] = r.nextInt(q)+p;
-            choiceArray[3] = q+1;
-            Log.d("generateQuestion", "a1: " +choiceArray[0]+" a2: " +choiceArray[1] + " a3: " +choiceArray[2] + " a4: " +choiceArray[3]);
-        }
-        if ((game_type == 3) && (difficulty == 0)) {
-            int difficulty_max = 10;
-            int difficult_min = 1;
-            int mid = (int)(difficult_min+difficulty_max)/2;
-            int p = r.nextInt(mid-difficult_min)+difficult_min;
-            int q = r.nextInt(difficulty_max-mid)+mid;
-            Log.d("generateQuestion", "p: "+p+" q : " +q);
-            question = p + " + " + q+" ?";
-            choiceArray[0] = p+q+r.nextInt(difficulty_max-difficult_min)+1;
-            choiceArray[1] = q-p+r.nextInt(difficulty_max)-1;
-            choiceArray[2] = (p+q)/2;
-            choiceArray[3] = p+q;
-            Log.d("generateQuestion", "a1: " +choiceArray[0]+" a2: " +choiceArray[1] + " a3: " +choiceArray[2] + " a4: " +choiceArray[3]);
-        }
-        if ((game_type == 4) && (difficulty == 0)) {
-            int difficulty_max = 10;
-            int difficult_min = 1;
-            int mid = (int)(difficult_min+difficulty_max)/2;
-            int p = r.nextInt(mid-difficult_min)+difficult_min;
-            int q = r.nextInt(difficulty_max-mid)+mid;
-            Log.d("generateQuestion", "p: "+p+" q : " +q);
-            question = q + " - " + p+" ?";
-            choiceArray[0] = q-p+r.nextInt(difficulty_max-difficult_min)+1;
-            choiceArray[1] = p+q;
-            choiceArray[2] = (q-p)/2;
-            choiceArray[3] = q-p;
-            Log.d("generateQuestion", "a1: " +choiceArray[0]+" a2: " +choiceArray[1] + " a3: " +choiceArray[2] + " a4: " +choiceArray[3]);
-        }
+
         updateView();
 
 
     }
+
 
     private void validateAnswer() {
         boolean success = false;
@@ -231,40 +169,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         ((Button) findViewById(R.id.button3)).setText(Integer.toString(tempArray[2]));
         ((Button) findViewById(R.id.button4)).setText(Integer.toString(tempArray[3]));
     }
-
-/*    public void onRadioButtonClicked(View view) {
-        // Is the button now checked?
-        boolean checked = ((RadioButton) view).isChecked();
-
-        // Check which radio button was clicked
-        switch(view.getId()) {
-            case R.id.radio_gt:
-                if (checked)
-                    game_type = 0;
-                    generateQuestion();
-                    break;
-            case R.id.radio_lt:
-                if (checked)
-                    game_type = 1;
-                    generateQuestion();
-                    break;
-            case R.id.radio_between:
-                if (checked)
-                    game_type = 2;
-                    generateQuestion();
-                break;
-            case R.id.radio_add:
-                if (checked)
-                    game_type = 3;
-                    generateQuestion();
-                break;
-            case R.id.radio_subtract:
-                if (checked)
-                    game_type = 4;
-                    generateQuestion();
-                break;
-        }
-    }*/
 
     private void showSucessFailure(boolean success) {
         int sound, image, time;
@@ -326,7 +230,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         //noinspection SimplifiableIfStatement
         switch(id) {
             case R.id.action_settings:
-
+                Toast.makeText(this, "Coming soon...", Toast.LENGTH_LONG).show();
                 break;
             case R.id.action_help:
                 onCoachMark();
@@ -358,5 +262,90 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
             }
         });
         dialog.show();
+    }
+
+    private void generateQuestionBasedOnGameType(int tmpgame_type) {
+        Random r = new Random();
+        switch (tmpgame_type) {
+            case 0: {
+                int difficulty_max = 50;
+                int difficulty_min = 5;
+                int q = r.nextInt(difficulty_max - difficulty_min) + difficulty_min + 1;
+                if (q == difficulty_max) {
+                    q = q - 2;
+                }
+                Log.d("generateQuestion", "q : " + q);
+                question = " >  " + q + " ? ";
+                choiceArray[0] = r.nextInt(q - difficulty_min) + difficulty_min;
+                choiceArray[1] = r.nextInt(q - difficulty_min) + difficulty_min;
+                choiceArray[2] = r.nextInt(q - difficulty_min) + difficulty_min;
+                choiceArray[3] = r.nextInt(difficulty_max - q) + q + 1;
+                Log.d("generateQuestion", "a1: " + choiceArray[0] + " a2: " + choiceArray[1] + " a3: " + choiceArray[2] + " a4: " + choiceArray[3]);
+                break;
+            }
+            case 1: {
+                int difficulty_max = 50;
+                int difficulty_min = 5;
+                int q = r.nextInt(difficulty_max - difficulty_min) + difficulty_min + 1;
+                if (q == difficulty_max) {
+                    q = q - 2;
+                }
+                Log.d("generateQuestion", "q : " + q);
+                question = " < " + q + " ? ";
+                choiceArray[0] = r.nextInt(difficulty_max - q) + q + 1;
+                choiceArray[1] = r.nextInt(difficulty_max - q) + q + 1;
+                choiceArray[2] = r.nextInt(difficulty_max - q) + q + 1;
+                choiceArray[3] = r.nextInt(q - difficulty_min) + difficulty_min;
+                Log.d("generateQuestion", "a1: " + choiceArray[0] + " a2: " + choiceArray[1] + " a3: " + choiceArray[2] + " a4: " + choiceArray[3]);
+                break;
+            }
+            case 2: {
+                int difficulty_max = 50;
+                int difficulty_min = 5;
+                int q = r.nextInt(difficulty_max - difficulty_min) + difficulty_min + 1;
+                if (q == difficulty_max) {
+                    q = q - 2;
+                }
+                int p = q + 2;
+                Log.d("generateQuestion", "p: " + p + " q : " + q);
+                question = " " + q + " ___ " + p + " ?";
+                choiceArray[0] = r.nextInt(p) + difficulty_min;
+                choiceArray[1] = r.nextInt(q) + difficulty_min;
+                choiceArray[2] = r.nextInt(q) + p;
+                choiceArray[3] = q + 1;
+                Log.d("generateQuestion", "a1: " + choiceArray[0] + " a2: " + choiceArray[1] + " a3: " + choiceArray[2] + " a4: " + choiceArray[3]);
+                break;
+            }
+            case 3: {
+                int difficulty_max = 10;
+                int difficult_min = 1;
+                int mid = (difficult_min + difficulty_max) / 2;
+                int p = r.nextInt(mid - difficult_min) + difficult_min;
+                int q = r.nextInt(difficulty_max - mid) + mid;
+                Log.d("generateQuestion", "p: " + p + " q : " + q);
+                question = p + " + " + q + " ?";
+                choiceArray[0] = p + q + r.nextInt(difficulty_max - difficult_min) + 1;
+                choiceArray[1] = q - p + r.nextInt(difficulty_max) - 1;
+                choiceArray[2] = (p + q) / 2;
+                choiceArray[3] = p + q;
+                Log.d("generateQuestion", "a1: " + choiceArray[0] + " a2: " + choiceArray[1] + " a3: " + choiceArray[2] + " a4: " + choiceArray[3]);
+                break;
+            }
+            case 4: {
+                int difficulty_max = 10;
+                int difficult_min = 1;
+                int mid = (difficult_min + difficulty_max) / 2;
+                int p = r.nextInt(mid - difficult_min) + difficult_min;
+                int q = r.nextInt(difficulty_max - mid) + mid;
+                Log.d("generateQuestion", "p: " + p + " q : " + q);
+                question = q + " - " + p + " ?";
+                choiceArray[0] = q - p + r.nextInt(difficulty_max - difficult_min) + 1;
+                choiceArray[1] = p + q;
+                choiceArray[2] = (q - p) / 2;
+                choiceArray[3] = q - p;
+                Log.d("generateQuestion", "a1: " + choiceArray[0] + " a2: " + choiceArray[1] + " a3: " + choiceArray[2] + " a4: " + choiceArray[3]);
+                break;
+            }
+        }
     }
 }
